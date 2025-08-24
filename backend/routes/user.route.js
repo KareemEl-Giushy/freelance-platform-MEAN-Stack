@@ -17,7 +17,7 @@ const upload = multer({storage: myStorage})
 
 router.post('/register', register);
 router.post('/login', login)
-router.post('/:id', getUserById)
+router.get('/:id', getUserById)
 router.put('/:id', upload.single('image'), editUser)
 
 module.exports = router;

@@ -6,7 +6,7 @@ const { getProposalsByUserID, getProposalByServiceID, createProposal, acceptProp
 router.get('/s/:id', getProposalByServiceID)
 router.get('/u/:id', getProposalsByUserID)
 router.post('/', createProposal)
-router.put('/', acceptProposal)
-router.delete('/', deleteProposal)
+router.put('/:id', acceptProposal)
+router.delete('/:id', deleteProposal)
 
 module.exports = router
