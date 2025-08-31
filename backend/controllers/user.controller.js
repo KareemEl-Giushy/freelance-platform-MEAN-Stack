@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
 exports.getUserById = async (req, res) => {
     try{  
 
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id, {password: 0});
 
         res.status(200).json(user)
     }catch(err) {
@@ -59,9 +59,15 @@ exports.getUserById = async (req, res) => {
 }
 
 exports.editUser = async (req, res) => {
+    let user = req.body;
     try{
 
-        await User.findByIdAndUpdate(req.params.id, req.body)
+        if(req.body['password']) {
+            const hashedPass = await bcrypt.hash(req.body['password'], 10)
+            user.password = hashedPass
+        }
+
+        await User.findByIdAndUpdate(req.params.id, user)
         res.status(200).json({
             message: "User Updated"
         })

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth-guard';
+import { loginGuard } from './core/guards/login-guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'client',
+    canActivate: [ authGuard ],
     loadComponent: () => import('./pages/client/client').then((c) => c.Client),
     children: [
       {
@@ -35,7 +38,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/client/post/post').then((c) => c.Post),
       },
       {
-        path: 'service-porposals/:id',
+        path: 'service-proposals/:id',
         loadComponent: () =>
           import('./pages/client/service-proposals/service-proposals').then(
             (c) => c.ServiceProposals
@@ -57,10 +60,12 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [ loginGuard ],
     loadComponent: () => import('./pages/login/login').then((c) => c.Login),
   },
   {
     path: 'register',
+    canActivate: [ loginGuard ],
     loadComponent: () => import('./pages/register/register').then((c) => c.Register),
   },
   {

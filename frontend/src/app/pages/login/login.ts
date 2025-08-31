@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../../core/services/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,16 @@ export class Login {
     this._userService.login(this.loginForm.value).subscribe({
       next: (res: any) => {
         console.log(res)
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('_token', res.token);
         this.router.navigate(['/client'])
       },
       error: (err) => {
-
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Wrong Username or password!",
+          // footer: '<a href="#">Why do I have this issue?</a>'
+        });
       }
     })
   }

@@ -19,7 +19,7 @@ router.get('/', getServices)
 router.get('/:id', getServiceById)
 router.get('/u/:id', getMyServices)
 router.post('/create', upload.single('image') ,createService)
-router.delete('/:id', createService)
+router.delete('/:id', deleteService)
 
 
 module.exports = router

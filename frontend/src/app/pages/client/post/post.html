@@ -23,21 +23,21 @@
                     <h4><i class="ti-briefcase mr-1"></i>Submit Task Form</h4>
                 </div>
             </div>
-
+            <form [formGroup]="addPostForm" (ngSubmit)="save()">
             <div class="_dashboard_content_body">
                 <div class="row">
 
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-group">
                             <label>Project Name</label>
-                            <input type="text" class="form-control with-light">
+                            <input type="text"  formControlName="name" [ngClass]="{'form-control with-light br-0': true, 'error': this.addPostForm.controls['name'].touched && this.addPostForm.controls['name'].invalid}">
                         </div>
                     </div>
 
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-group with-light">
                             <label>Category</label>
-                            <select id="jb-category" class="form-control ">
+                            <select id="jb-category" formControlName="categories" [ngClass]="{'form-control': true, 'error': this.addPostForm.controls['categories'].touched && this.addPostForm.controls['categories'].invalid}">
                                 <option value=""></option>
                                 <option value="Finance & Accounting">Finance & Accounting</option>
                                 <option value="Banking">Banking</option>
@@ -51,7 +51,7 @@
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-group">
                             <label>Location</label>
-                            <input type="text" class="form-control with-light">
+                            <input type="text"  formControlName="location" [ngClass]="{'form-control with-light br-0': true, 'error': this.addPostForm.controls['location'].touched && this.addPostForm.controls['location'].invalid}">
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         <div class="form-row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control with-light br-0">
+                                    <input type="text" formControlName="salary" [ngClass]="{'form-control with-light br-0': true, 'error': this.addPostForm.controls['salary'].touched && this.addPostForm.controls['salary'].invalid}">
                                     <div class="input-group-append">
                                         <span class="input-group-text light">USD</span>
                                     </div>
@@ -70,30 +70,26 @@
                         </div>
                     </div>
 
-
-
-
-
                     <div class="col-xl-12 col-lg-12">
                         <div class="form-group">
                             <label>Job Description</label>
-                            <textarea class="form-control with-light"></textarea>
+                            <textarea formControlName="description" [ngClass]="{'form-control with-light': true, 'error': this.addPostForm.controls['description'].touched && this.addPostForm.controls['description'].invalid}"></textarea>
                         </div>
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file"  class="form-control with-light" >
+                            <input (change)="selectImage($event)" type="file"  class="form-control with-light" >
                         </div>
                     </div>
 
                 </div>
             </div>
+                <button type="submit" class="btn btn-save m-3" [disabled]="this.addPostForm.invalid">Submit Job</button>
+            </form>
         </div>
         <!-- Single Wrap End -->
-
-        <button type="button" class="btn btn-save">Submit Job</button>
 
     </div>
 </div>
